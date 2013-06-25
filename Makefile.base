@@ -1,3 +1,7 @@
 ifeq ($(BOARD),stm32f4discovery)
  INCLUDES += -I$(RIOTBOARD)/stm32f4discovery/include/
 endif
+
+ifeq ($(BOARD),agilefox)
+ INCLUDES += -I$(RIOTBOARD)/agilefox/include/
+endif
