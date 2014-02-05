@@ -213,7 +213,7 @@ static void SystemInit_ExtMemCtl(void);
   * @param  None
   * @retval None
   */
-extern void ctx_switch(void);
+extern void ctx_switch (void);
 
 void SystemInit(void)
 {
