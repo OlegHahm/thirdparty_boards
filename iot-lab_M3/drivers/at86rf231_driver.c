@@ -7,6 +7,7 @@
 #include <board.h>
 
 #include <at86rf231.h>
+#include <at86rf231_spi1.h>
 extern volatile unsigned int sched_context_switch_request;
 
 /*
@@ -154,6 +155,7 @@ void at86rf231_spi_unselect(void) { CSn_SET(); }
 void at86rf231_enable_interrupts(void) { enable_exti_interrupt(); }
 void at86rf231_disable_interrupts(void) { disable_exti_interrupt(); }
 
+extern void at86rf231_rx_irq(void);
 __attribute__((naked))
 void EXTI4_IRQHandler(void)
 {
