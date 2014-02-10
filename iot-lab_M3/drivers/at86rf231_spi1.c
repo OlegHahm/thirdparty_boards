@@ -4,7 +4,7 @@
 #include "cpu.h"
 #include "at86rf231_spi1.h"
 
-void at86rf231_spi1_init()
+void at86rf231_spi1_init(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   NVIC_InitTypeDef NVIC_InitStructure;
