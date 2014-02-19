@@ -2,10 +2,10 @@ MODULE =$(BOARD)_base
 
 .PHONY: $(BINDIR)agilefox_drivers.a
 
-all: $(BINDIR)agilefox_base.a 
+all: $(BINDIR)$(MODULE).a 
 	$(MAKE) -C drivers
 
-$(BINDIR)agilefox_base.a: $(OBJ)
-	$(AR) rcs $(BINDIR)agilefox_base.a $(OBJ)
+$(BINDIR)$(MODULE): $(OBJ)
+	$(AR) rcs $(BINDIR)$(MODULE).a $(OBJ)
 
 include $(RIOTBASE)/Makefile.base
