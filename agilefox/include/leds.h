@@ -4,6 +4,7 @@
 void leds_init(void);
 void led_on(uint32_t);
 void led_off(uint32_t);
+void led_toggle(uint32_t LED_PIN);
 
 #define LED_RED_PIN         (1<<12)
 #define LED_GREEN_PIN       (1<<10)

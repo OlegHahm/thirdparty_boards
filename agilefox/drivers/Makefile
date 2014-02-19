@@ -1,5 +1,5 @@
 SRC = $(wildcard *.c)
-BINDIR = ../bin/
+#BINDIR = ../bin/
 OBJ = $(SRC:%.c=$(BINDIR)%.o)
 DEP = $(SRC:%.c=$(BINDIR)%.d)
 
@@ -10,9 +10,12 @@ INCLUDES += -I$(RIOTCPU)/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdP
 INCLUDES += -I$(RIOTCPU)/stm32f103rey6/include
 
 INCLUDES += -I$(RIOTBASE)/drivers/at86rf231/include
+INCLUDES += -I$(RIOTBASE)/drivers/include
 INCLUDES += -I$(RIOTBASE)/sys/include
-INCLUDES += -I$(RIOTBASE)/sys/net
+INCLUDES += -I$(RIOTBASE)/sys/net/include
 
+.PHONY: $(BINDIR)agilefox_drivers.a
+	
 $(BINDIR)agilefox_drivers.a: $(OBJ)
 	$(AR) rcs $(BINDIR)agilefox_base.a $(OBJ)
 
@@ -28,4 +31,4 @@ $(BINDIR)%.o: %.c
 # remove compilation products
 
 clean:
-	rm -f $(OBJ) $(DEP)
+	rm -f $(BINDIR)agilefox_drivers.a $(OBJ) $(DEP)

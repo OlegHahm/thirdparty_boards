@@ -8,7 +8,6 @@
 void at86rf231_spi2_init()
 {
   GPIO_InitTypeDef GPIO_InitStructure;
-  NVIC_InitTypeDef NVIC_InitStructure;
   SPI_InitTypeDef SPI_InitStructure;
 
 // RCC
