@@ -13,7 +13,7 @@ all: $(BINDIR)stm32f4discovery_base.a
 	$(MAKE) -C drivers
 
 $(BINDIR)stm32f4discovery_base.a: $(OBJ)
-	$(AR) rcs $(BINDIR)stm32f4discovery_base.a $(OBJ)
+	$(AD) $(AR) rcs $(BINDIR)stm32f4discovery_base.a $(OBJ)
 
 # pull in dependency info for *existing* .o files
 -include $(OBJ:.o=.d)
@@ -21,8 +21,8 @@ $(BINDIR)stm32f4discovery_base.a: $(OBJ)
 # compile and generate dependency info
 $(BINDIR)%.o: %.c
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
-	$(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
 	@printf "$(BINDIR)"|cat - $(BINDIR)$*.d > /tmp/riot_out && mv /tmp/riot_out $(BINDIR)$*.d
 
 # remove compilation products
