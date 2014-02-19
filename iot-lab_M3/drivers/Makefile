@@ -17,15 +17,15 @@ INCLUDES += -I$(RIOTBASE)/sys/net/include
 .PHONY: $(BINDIR)iot-lab_M3_drivers.a
 
 $(BINDIR)iot-lab_M3_drivers.a: $(OBJ)
-	$(AR) rcs $(BINDIR)iot-lab_M3_base.a $(OBJ)
+	$(AD) $(AR) rcs $(BINDIR)iot-lab_M3_base.a $(OBJ)
 
 # pull in dependency info for *existing* .o files
 -include $(OBJ:.o=.d)
 
 # compile and generate dependency info
 $(BINDIR)%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
-	$(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
 	@printf "$(BINDIR)" | cat - $(BINDIR)$*.d > /tmp/fw_out && mv /tmp/fw_out $(BINDIR)$*.d
 
 # remove compilation products
