@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stddef.h>
 
-#include <cpu.h>
-#include <sched.h>
+#include "cpu.h"
+#include "sched.h"
+#include "vtimer.h"
 
-#include <board.h>
+#include "board.h"
 
-#include <at86rf231.h>
-#include <at86rf231_spi1.h>
+#include "at86rf231.h"
+#include "at86rf231_spi.h"
+#include "at86rf231_spi1.h"
+
 extern volatile unsigned int sched_context_switch_request;
 
 /*
