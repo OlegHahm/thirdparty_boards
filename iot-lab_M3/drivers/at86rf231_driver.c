@@ -197,7 +197,7 @@ void EXTI4_IRQHandler(void)
 
         if (sched_context_switch_request) {
             // scheduler
-            sched_run();
+            thread_yield();
         }
     }
 
