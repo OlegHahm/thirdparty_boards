@@ -63,7 +63,7 @@
   */
 
 #include "stm32f10x.h"
-#include "leds.h"
+#include "board.h"
 
 void uart_init(void);
 /**
@@ -307,7 +307,7 @@ void uart_init(void)
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    USART_InitStructure.USART_BaudRate = 115200;                // TODO : config parameter
+    USART_InitStructure.USART_BaudRate = UART_BAUDRATE;                // TODO : config parameter
     USART_InitStructure.USART_WordLength = USART_WordLength_8b;
     USART_InitStructure.USART_StopBits = USART_StopBits_1;
     USART_InitStructure.USART_Parity = USART_Parity_No;
