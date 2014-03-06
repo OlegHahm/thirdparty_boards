@@ -3,9 +3,9 @@ export CPU = stm32f103rey6
 
 # toolchain config
 export PREFIX = arm-none-eabi-
-export CC = @$(PREFIX)gcc
+export CC = $(PREFIX)gcc
 export AR = @$(PREFIX)ar
-export CFLAGS = -DUSE_STDPERIPH_DRIVER -ggdb -g3 -std=gnu99 -O0 -Wall -Wstrict-prototypes -mcpu=cortex-m3 $(FPU_USAGE) -mlittle-endian -mthumb -mthumb-interwork -nostartfiles
+export CFLAGS += -DUSE_STDPERIPH_DRIVER -ggdb -g3 -std=gnu99 -O0 -Wall -Wstrict-prototypes -mcpu=cortex-m3 $(FPU_USAGE) -mlittle-endian -mthumb -mthumb-interwork -nostartfiles
 export ASFLAGS = -ggdb -g3 -mcpu=cortex-m3 $(FPU_USAGE) -mlittle-endian
 export AS = $(PREFIX)as
 export LINK = $(PREFIX)gcc
@@ -19,13 +19,13 @@ LINKFLAGS =  -DUSE_STDPERIPH_DRIVER -DUSE_STM32_DISCOVERY -g3 -ggdb -mcpu=cortex
 ifeq ($(strip $(PORT)),)
 	export PORT = /dev/ttyUSB2
 endif
-export HEXFILE = bin/$(PROJECT).hex
+export HEXFILE = bin/$(BOARD)/$(PROJECT).hex
 export FFLAGS = $(HEXFILE)
 
-export ELFFILE = bin/$(PROJECT).elf
+export ELFFILE = bin/$(BOARD)/$(PROJECT).elf
 export DEBUGGER_FLAGS = $(ELFFILE)
 
-INCLUDES += -Iinclude/
+INCLUDES += -I$(RIOTBOARD)/$(BOARD)/include/
 INCLUDES += -I$(RIOTCPU)/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/Include
 INCLUDES += -I$(RIOTCPU)/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x
 INCLUDES += -I$(RIOTCPU)/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdPeriph_Driver/inc

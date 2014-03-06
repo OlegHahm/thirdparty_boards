@@ -2,7 +2,7 @@ MODULE =$(BOARD)_base
 
 .PHONY: $(BINDIR)agilefox_drivers.a
 
-all: $(BINDIR)$(MODULE).a 
+all: $(BINDIR)$(MODULE).a
 	$(MAKE) -C drivers
 
 $(BINDIR)$(MODULE): $(OBJ)

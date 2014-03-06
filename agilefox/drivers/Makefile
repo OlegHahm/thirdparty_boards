@@ -15,18 +15,18 @@ INCLUDES += -I$(RIOTBASE)/sys/net/include
 .PHONY: $(BINDIR)agilefox_drivers.a
 	
 $(BINDIR)agilefox_drivers.a: $(OBJ)
-	$(AR) rcs $(BINDIR)agilefox_base.a $(OBJ)
+	$(AD) $(AR) rcs $(BINDIR)agilefox_base.a $(OBJ)
 
 # pull in dependency info for *existing* .o files
 -include $(OBJ:.o=.d)
 
 # compile and generate dependency info
 $(BINDIR)%.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
-	$(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
 	@printf "$(BINDIR)" | cat - $(BINDIR)$*.d > /tmp/fw_out && mv /tmp/fw_out $(BINDIR)$*.d
 
 # remove compilation products
 
 clean:
-	rm -f $(BINDIR)agilefox_drivers.a $(OBJ) $(DEP)
+	rm -f $(OBJ) $(DEP)
