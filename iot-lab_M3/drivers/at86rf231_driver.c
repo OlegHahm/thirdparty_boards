@@ -83,35 +83,35 @@ void at86rf231_gpio_spi_interrupts_init(void)
     GPIO_InitTypeDef   GPIO_InitStructure;
     NVIC_InitTypeDef   NVIC_InitStructure;
 
-    // SPI1 init
+    /* SPI1 init */
     at86rf231_spi1_init();
 
-    // IRQ0 : PC4, INPUT and IRQ
+    /* IRQ0 : PC4, INPUT and IRQ */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-    // Enable AFIO clock
+    /* Enable AFIO clock */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
 
-    // Connect EXTI4 Line to PC4 pin
+    /* Connect EXTI4 Line to PC4 pin */
     GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource4);
 
-    // Configure EXTI4 line
+    /* Configure EXTI4 line */
     enable_exti_interrupt();
 
-    // Enable and set EXTI4 Interrupt to the lowest priority
+    /* Enable and set EXTI4 Interrupt to the lowest priority */
     NVIC_InitStructure.NVIC_IRQChannel = EXTI4_IRQn;
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x01;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 
-    // Init GPIOs
+    /* Init GPIOs */
 
-    // CS & SLEEP
+    /* CS & SLEEP */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_4;
@@ -119,7 +119,7 @@ void at86rf231_gpio_spi_interrupts_init(void)
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    // RESET
+    /* RESET */
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
@@ -130,7 +130,7 @@ void at86rf231_gpio_spi_interrupts_init(void)
 
 void at86rf231_reset(void)
 {
-    // force reset
+    /* force reset */
     RESET_CLR();
     CSn_SET();
     SLEEP_CLR();
@@ -139,16 +139,16 @@ void at86rf231_reset(void)
 
     RESET_SET();
 
-    // Wait until TRX_OFF is entered
+    /* Wait until TRX_OFF is entered */
     vtimer_usleep(AT86RF231_TIMING__RESET_TO_TRX_OFF);
 
-    // Send a FORCE TRX OFF command
+    /* Send a FORCE TRX OFF command */
     at86rf231_reg_write(AT86RF231_REG__TRX_STATE, AT86RF231_TRX_STATE__FORCE_TRX_OFF);
 
-    // Wait until TRX_OFF state is entered from P_ON
+    /* Wait until TRX_OFF state is entered from P_ON */
     vtimer_usleep(AT86RF231_TIMING__SLEEP_TO_TRX_OFF);
 
-    // busy wait for TRX_OFF state
+    /* busy wait for TRX_OFF state */
     uint8_t status;
     uint8_t max_wait = 100;   // TODO : move elsewhere, this is in 10us
 
@@ -190,13 +190,13 @@ void EXTI4_IRQHandler(void)
     save_context();
 
     if (EXTI_GetITStatus(EXTI_Line4) != RESET) {
-        // IRQ_3 (TRX_END), read Frame Buffer
+        /* IRQ_3 (TRX_END), read Frame Buffer */
         EXTI_ClearITPendingBit(EXTI_Line4);
 
         at86rf231_rx_irq();
 
         if (sched_context_switch_request) {
-            // scheduler
+            /* scheduler */
             thread_yield();
         }
     }
