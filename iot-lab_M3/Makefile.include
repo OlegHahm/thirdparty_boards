@@ -35,3 +35,6 @@ USEMODULE += stm32f10xstdperi
 UNDEF += $(BINDIR)syscalls.o
 
 export INCLUDES 
+
+#insert OFLAGS -O ihex
+export OFLAGS = -O ihex
