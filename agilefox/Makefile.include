@@ -19,10 +19,10 @@ LINKFLAGS =  -DUSE_STDPERIPH_DRIVER -DUSE_STM32_DISCOVERY -g3 -ggdb -mcpu=cortex
 ifeq ($(strip $(PORT)),)
 	export PORT = /dev/ttyUSB2
 endif
-export HEXFILE = bin/$(BOARD)/$(PROJECT).hex
+export HEXFILE = $(BINDIR)/$(PROJECT).hex
 export FFLAGS = $(HEXFILE)
 
-export ELFFILE = bin/$(BOARD)/$(PROJECT).elf
+export ELFFILE = $(BINDIR)/$(PROJECT).elf
 export DEBUGGER_FLAGS = $(ELFFILE)
 
 INCLUDES += -I$(RIOTBOARD)/$(BOARD)/include/
@@ -32,6 +32,7 @@ INCLUDES += -I$(RIOTCPU)/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/STM32F10x_StdP
 INCLUDES += -I$(RIOTCPU)/stm32f103rey6/include
 
 USEMODULE += stm32f10xstdperi
-UNDEF += $(BINDIR)syscalls.o
+export UNDEF += $(BINDIR)cpu/startup.o
+export UNDEF += $(BINDIR)cpu/syscalls.o
 
 export INCLUDES 
