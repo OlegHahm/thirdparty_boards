@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2014 Freie Universität Berlin
+ *
+ * This file is subject to the terms and conditions of the GNU Lesser General
+ * Public License. See the file LICENSE in the top level directory for more
+ * details.
+ */
+
+/**
+ * @ingroup     board_iot-lab_M3
+ * @{
+ *
+ * @file        periph_conf.h
+ * @brief       Peripheral MCU configuration for the iot-lab_M3 board
+ *
+ * @author      Thomas Eichinger <thomas.eichinger@fu-berlin.de>
+ */
 #ifndef __PERIPH_CONF_H
 #define __PERIPH_CONF_H
 
@@ -32,3 +49,4 @@
 /** @} */
 
 #endif /* __PERIPH_CONF_H */
+/** @} */
