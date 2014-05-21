@@ -5,7 +5,7 @@
 #include "at86rf231_spi2.h"
 
 
-void at86rf231_spi2_init()
+void at86rf231_spi2_init(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   SPI_InitTypeDef SPI_InitStructure;
