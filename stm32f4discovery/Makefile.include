@@ -11,15 +11,15 @@ export AS = $(PREFIX)as
 export LINK = $(PREFIX)gcc
 export SIZE = $(PREFIX)size
 export OBJCOPY = $(PREFIX)objcopy
-FLASHER = $(PREFIX)objcopy -O binary $(PROJBINDIR)/$(PROJECT).elf $(PROJBINDIR)/$(PROJECT).bin && st-flash
+FLASHER = $(PREFIX)objcopy -O binary $(PROJBINDIR)/$(APPLICATION).elf $(PROJBINDIR)/$(APPLICATION).bin && st-flash
 TERM = stty -F $(PORT) 115200 && cat
 LINKFLAGS =  -DUSE_STDPERIPH_DRIVER -DUSE_STM32_DISCOVERY -g3 -ggdb -mcpu=cortex-m4 $(FPU_USAGE) -mlittle-endian -static -lgcc -mthumb -mthumb-interwork -nostartfiles -T$(RIOTCPU)/$(CPU)/stm32_flash.ld
 
 ifeq ($(strip $(PORT)),)
 	export PORT = /dev/ttyUSB0
 endif
-export HEXFILE = bin/$(PROJECT).hex
-export BINFILE = bin/$(PROJECT).bin
+export HEXFILE = bin/$(APPLICATION).hex
+export BINFILE = bin/$(APPLICATION).bin
 export FFLAGS = write $(BINFILE) 0x08000000
 
 #include $(RIOTBOARD)/msba2-common/Makefile.dep

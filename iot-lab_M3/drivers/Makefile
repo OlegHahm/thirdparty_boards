@@ -24,8 +24,8 @@ $(BINDIR)iot-lab_M3_drivers.a: $(OBJ)
 
 # compile and generate dependency info
 $(BINDIR)%.o: %.c
-	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
-	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(PROJECTINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(APPLICATIONINCLUDE) $(CPUINCLUDE) -c $*.c -o $(BINDIR)$*.o
+	$(AD) $(CC) $(CFLAGS) $(INCLUDES) $(BOARDINCLUDE) $(APPLICATIONINCLUDE) $(CPUINCLUDE) -MM $*.c > $(BINDIR)$*.d
 	@printf "$(BINDIR)" | cat - $(BINDIR)$*.d > /tmp/fw_out && mv /tmp/fw_out $(BINDIR)$*.d
 
 # remove compilation products

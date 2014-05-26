@@ -19,10 +19,10 @@ LINKFLAGS =  -DUSE_STDPERIPH_DRIVER -DUSE_STM32_DISCOVERY -g3 -ggdb -mcpu=cortex
 ifeq ($(strip $(PORT)),)
 	export PORT = /dev/ttyUSB2
 endif
-export HEXFILE = $(BINDIR)/$(PROJECT).hex
+export HEXFILE = $(BINDIR)/$(APPLICATION).hex
 export FFLAGS = $(HEXFILE)
 
-export ELFFILE = $(BINDIR)/$(PROJECT).elf
+export ELFFILE = $(BINDIR)/$(APPLICATION).elf
 export DEBUGGER_FLAGS = $(ELFFILE)
 
 INCLUDES += -I$(RIOTBOARD)/$(BOARD)/include/
